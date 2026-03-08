@@ -5,10 +5,10 @@ Production-ready EKS cluster with ArgoCD for GitOps deployments.
 ## Prerequisites
 
 - Terraform >= 1.5
-- AWS CLI configured with credentials
 - kubectl
 - ArgoCD CLI
 - GitHub CLI (gh)
+- AWS CLI configured with credentials
 
 ## Setup
 
