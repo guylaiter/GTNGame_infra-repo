@@ -8,7 +8,7 @@ GITHUB_REPO="guylaiter/FinalProject_app-repo"
 ARGOCD_NAMESPACE="argocd"
 ARGOCD_PORT="8080"
 TOKEN_EXPIRY="365d"
-PORT_FORWARD_TIMEOUT=10  # seconds
+PORT_FORWARD_TIMEOUT=10  
 
 # ============================================
 # ArgoCD Complete Setup Script
@@ -43,7 +43,9 @@ echo ""
 # Step 1: Install ArgoCD
 echo "Step 1/5: Installing ArgoCD..."
 kubectl create namespace $ARGOCD_NAMESPACE 2>/dev/null || echo "Namespace already exists"
-kubectl apply -n $ARGOCD_NAMESPACE -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+# Apply ArgoCD manifests (ignore annotation warning - it's non-critical)
+kubectl apply -n $ARGOCD_NAMESPACE -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml 2>&1 | grep -v "Too long: must have at most" || true
 
 echo "Waiting for ArgoCD pods to be ready (this may take 2-3 minutes)..."
 kubectl wait --for=condition=Ready pods --all -n $ARGOCD_NAMESPACE --timeout=300s
