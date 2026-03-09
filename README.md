@@ -2,6 +2,9 @@
 
 Production-ready EKS cluster with ArgoCD for GitOps deployments.
 
+## Architecture Diagram
+![Infrastructure Architecture](infrastructure-Diagram.png)
+
 ## Prerequisites
 
 - Terraform >= 1.5
