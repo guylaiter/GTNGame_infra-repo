@@ -24,7 +24,7 @@ terraform apply
 - EKS cluster in ap-south-1 (Mumbai)
 - VPC with public/private subnets
 - NAT Gateway 
-- 1 t3a.medium worker node
+- 2 t3a.medium worker node
 
 **Time:** ~10-15 minutes
 
@@ -37,13 +37,12 @@ Verify cluster connection:
 ```bash
 kubectl get nodes
 ```
-**Expected:** 1 node in `Ready` status
+**Expected:** 2 node in `Ready` status
 
 ### 3. Install and Configure ArgoCD (All-in-One)
 ```bash
 cd ../scripts
-chmod +x setup-argocd-complete.sh
-./setup-argocd-complete.sh
+bash setup-argocd-complete.sh
 ```
 
 **This single script will:**
@@ -142,10 +141,3 @@ kubectl cluster-info
 │   └── setup-argocd-complete.sh  # All-in-one ArgoCD setup
 └── README.md                     # This file
 ```
-
-## Next Steps
-
-After infrastructure is ready:
-1. Create Helm charts in `FinalProject_cluster-repo`
-2. Configure ArgoCD Application
-3. Set up CI/CD pipeline to auto-deploy
