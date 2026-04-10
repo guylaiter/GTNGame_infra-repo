@@ -1,9 +1,9 @@
-# FinalProject Infrastructure
+# GTNGame Infrastructure
 
 Production-ready EKS cluster with ArgoCD for GitOps deployments.
 
 ## Architecture Diagram
-![Infrastructure Architecture](infrastructure-Diagram.png)
+![Infrastructure Architecture](Infra-Architecture.png)
 
 ## How This Fits in the Project
 
@@ -11,9 +11,9 @@ This is **one of three repositories** that make up the complete infrastructure:
 
 | Repository | Purpose | Technology |
 |------------|---------|------------|
-| **[FinalProject_infrastructure-repo](https://github.com/guylaiter/FinalProject_infrastructure-repo)** ← You are here | AWS infrastructure provisioning | Terraform, EKS, VPC, ArgoCD |
-| **[FinalProject_app-repo](https://github.com/guylaiter/FinalProject_app-repo)** | Application source code & CI/CD | Flask, PostgreSQL, GitHub Actions |
-| **[FinalProject_cluster-repo](https://github.com/guylaiter/FinalProject_cluster-repo)** | Kubernetes manifests & GitOps | Helm, ArgoCD, K8s |
+| **[GTNGame_infra-repo](https://github.com/guylaiter/GTNGame_infra-repo)** ← You are here | AWS infrastructure provisioning | Terraform, EKS, VPC, ArgoCD |
+| **[GTNGame_app-repo](https://github.com/guylaiter/GTNGame_app-repo)** | Application source code & CI/CD | Flask, PostgreSQL, GitHub Actions |
+| **[GTNGame_cluster-repo](https://github.com/guylaiter/GTNGame_cluster-repo)** | Kubernetes manifests & GitOps | Helm, ArgoCD, K8s |
 
 ## Prerequisites
 
@@ -43,7 +43,7 @@ terraform apply
 
 ### 2. Configure kubectl
 ```bash
-aws eks update-kubeconfig --region ap-south-1 --name Guy-FinalProject-Cluster
+aws eks update-kubeconfig --region ap-south-1 --name GTNGame-Cluster
 ```
 
 Verify cluster connection:
@@ -96,7 +96,7 @@ kubectl get pods -n argocd
 
 Check GitHub secrets were added:
 ```bash
-gh secret list -R guylaiter/FinalProject_app-repo
+gh secret list -R guylaiter/GTNGame_app-repo
 ```
 **Expected:** ARGOCD_TOKEN, ARGOCD_SERVER
 
@@ -140,7 +140,7 @@ kubectl logs -n argocd <pod-name>
 ### Can't connect to cluster
 ```bash
 # Reconfigure kubectl
-aws eks update-kubeconfig --region ap-south-1 --name Guy-FinalProject-Cluster
+aws eks update-kubeconfig --region ap-south-1 --name GTNGame-Cluster
 
 # Test connection
 kubectl cluster-info
@@ -165,18 +165,7 @@ terraform destroy
 
 ## Related Documentation
 
-- **Application Code:** See [FinalProject_app-repo](https://github.com/guylaiter/FinalProject_app-repo)
-- **Cluster Configuration:** See [FinalProject_cluster-repo](https://github.com/guylaiter/FinalProject_cluster-repo)
+- **Application Code:** See [GTNGame_app-repo](https://github.com/guylaiter/GTNGame_app-repo)
+- **Cluster Configuration:** See [GTNGame_cluster-repo](https://github.com/guylaiter/GTNGame_cluster-repo)
 - **Terraform AWS Provider:** https://registry.terraform.io/providers/hashicorp/aws/latest/docs
 - **ArgoCD Documentation:** https://argo-cd.readthedocs.io/
-
-## Next Steps
-
-After infrastructure is ready:
-1. Create secret in AWS Secrets Manager (see cluster-repo README)
-2. Deploy Kubernetes manifests via ArgoCD (see cluster-repo README)
-3. Build and push application image (see app-repo README)
-
-## License
-
-This project is part of a final course project.
